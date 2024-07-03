@@ -1,4 +1,5 @@
-﻿@model List<Category> 
+﻿@model List<Category>
+<partial name="_SuccessNotification" />
 
 <div class="container">
     <div class="row pt-4 pb-4">
@@ -14,24 +15,35 @@
         </div>
     </div>
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            Category Name
-        </th>
-        <th>
-            Display Order
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach(var obj in Model)
-        {
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@obj.Name</td>
-                <td>@obj.DisplayOrder</td>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    Display Order
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.DisplayOrder</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"> Edit</i>
+                            </a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"> Delete</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
