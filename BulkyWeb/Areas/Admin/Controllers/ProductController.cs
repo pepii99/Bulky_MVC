@@ -44,11 +44,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM obj)
         {
             if (ModelState.IsValid)
             {
-                _productRepo.Add(obj);
+                _productRepo.Add(obj.Product);
                 _productRepo.SaveChanges();
                 TempData["success"] = "Product created successfully.";
                 return RedirectToAction("Index");
