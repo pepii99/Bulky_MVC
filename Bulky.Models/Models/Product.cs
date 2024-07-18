@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Bulky.Models
@@ -21,5 +22,9 @@ namespace Bulky.Models
         [Required]
         [Range(1, 1000)]
         public double Price { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }

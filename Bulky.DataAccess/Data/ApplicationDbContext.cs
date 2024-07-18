@@ -34,6 +34,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "SWD9999001",
                     Price = 90,
+                    CategoryId = 10,
                 },
                 new Product
                 {
@@ -43,6 +44,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "CAW777777701",
                     Price = 30,
+                    CategoryId = 11,
                 },
                 new Product
                 {
@@ -52,6 +54,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "RITO5555501",
                     Price = 50,
+                    CategoryId = 12,
                 },
                 new Product
                 {
@@ -61,6 +64,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "WS3333333301",
                     Price = 65,
+                    CategoryId = 13,
                 },
                 new Product
                 {
@@ -70,6 +74,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "SOTJ1111111101",
                     Price = 27,
+                    CategoryId = 11,
                 },
                 new Product
                 {
@@ -79,6 +84,7 @@ namespace Bulky.DataAccess.Data
                     Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                     ISBN = "FOT000000001",
                     Price = 23,
+                    CategoryId = 10,
                 }
                 );
 
