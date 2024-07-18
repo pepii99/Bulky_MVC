@@ -35,6 +35,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "SWD9999001",
                     Price = 90,
                     CategoryId = 10,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -45,6 +46,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "CAW777777701",
                     Price = 30,
                     CategoryId = 11,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -55,6 +57,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "RITO5555501",
                     Price = 50,
                     CategoryId = 12,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -65,6 +68,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "WS3333333301",
                     Price = 65,
                     CategoryId = 13,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -75,6 +79,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "SOTJ1111111101",
                     Price = 27,
                     CategoryId = 11,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -85,6 +90,7 @@ namespace Bulky.DataAccess.Data
                     ISBN = "FOT000000001",
                     Price = 23,
                     CategoryId = 10,
+                    ImageUrl = "",
                 }
                 );
 
