@@ -25,7 +25,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View(objProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             IEnumerable<SelectListItem> categoryList = _categoryRepo.GetAll()
                 .Select(x => new SelectListItem
@@ -40,47 +40,25 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 Product = new Product()
             };
 
+            if(id == null || id == 0)
+            {
+                //create
+                return View(productVM);
+            }
+
+            //update
+            productVM.Product = _productRepo.Get(u => u.Id == id);
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM obj)
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
                 _productRepo.Add(obj.Product);
                 _productRepo.SaveChanges();
                 TempData["success"] = "Product created successfully.";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
-        public IActionResult Edit(int? id)
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            Product productObj = _productRepo.Get(u => u.Id == id);
-
-            if (productObj == null)
-            {
-                return NotFound();
-            }
-
-            return View(productObj);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _productRepo.Update(obj);
-                _productRepo.SaveChanges();
-                TempData["success"] = "Product updated successfully.";
                 return RedirectToAction("Index");
             }
             return View(obj);
