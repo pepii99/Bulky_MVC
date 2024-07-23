@@ -3,6 +3,7 @@ using Bulky.Models;
 using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
@@ -11,11 +12,13 @@ namespace BulkyWeb.Areas.Admin.Controllers
     {
         private readonly IProductRepository _productRepo;
         private readonly ICategoryRepository _categoryRepo;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IProductRepository productRepo, ICategoryRepository categoryRepo)
+        public ProductController(IProductRepository productRepo, ICategoryRepository categoryRepo, IWebHostEnvironment webHostEnvironment)
         {
             _productRepo = productRepo;
             _categoryRepo = categoryRepo;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -52,16 +55,39 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj, IFormFile? file)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                _productRepo.Add(obj.Product);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                }
+
+                _productRepo.Add(productVM.Product);
                 _productRepo.SaveChanges();
                 TempData["success"] = "Product created successfully.";
                 return RedirectToAction("Index");
             }
-            return View(obj);
+            else
+            {
+                productVM.CategoryList = _categoryRepo.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+            }
+            return View(productVM);
         }
 
         public IActionResult Delete(int? id)
