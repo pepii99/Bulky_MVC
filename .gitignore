@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Bulky/Bulky.DataAccess/Migrations
 /Bulky.DataAccess/Migrations
+/BulkyWeb/wwwroot/images/product
