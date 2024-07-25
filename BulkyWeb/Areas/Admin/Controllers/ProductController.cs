@@ -23,7 +23,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _productRepo.GetAll().ToList();
+            List<Product> objProductList = _productRepo.GetAll(includeProperties: "Category").ToList();
 
             return View(objProductList);
         }
