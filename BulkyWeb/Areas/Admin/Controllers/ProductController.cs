@@ -21,9 +21,34 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
             List<Product> objProductList = _productRepo.GetAll(includeProperties: "Category").ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                objProductList = objProductList
+                    .Where(s => s.Title.Contains(searchString))
+                    .ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    objProductList = objProductList.OrderByDescending(s => s.Title).ToList();
+                    break;
+                case "price_desc":
+                    objProductList = objProductList.OrderByDescending(s => s.Price).ToList();
+                    break;
+                default:
+                    objProductList = objProductList.OrderBy(s => s.Title).ToList();
+                    break;
+            }
 
             return View(objProductList);
         }
@@ -86,6 +111,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
                 if (productVM.Product.Id == 0)
                 {
+                    if (string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    {
+                        productVM.Product.ImageUrl = @"\images\product\raf,360x360,075,t,fafafa_ca443f4786.u1.jpg";
+                    }
+
                     _productRepo.Add(productVM.Product);
                 }
                 else
