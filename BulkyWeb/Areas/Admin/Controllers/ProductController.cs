@@ -23,8 +23,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Index(string sortOrder, string searchString)
         {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+            ViewData["NameDescSortParam"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["NameAscSortParam"] = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
+            ViewData["PriceDescSortParam"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+            ViewData["PriceAscSortParam"] = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
+            
 
             ViewData["CurrentFilter"] = searchString;
 
@@ -42,8 +45,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 case "name_desc":
                     objProductList = objProductList.OrderByDescending(s => s.Title).ToList();
                     break;
+                case "name_asc":
+                    objProductList = objProductList.OrderBy(s => s.Title).ToList();
+                    break;
                 case "price_desc":
                     objProductList = objProductList.OrderByDescending(s => s.Price).ToList();
+                    break;
+                case "price_asc":
+                    objProductList = objProductList.OrderBy(s => s.Price).ToList();
                     break;
                 default:
                     objProductList = objProductList.OrderBy(s => s.Title).ToList();
