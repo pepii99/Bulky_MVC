@@ -3,6 +3,7 @@ using Bulky.Models;
 using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
 namespace BulkyWeb.Areas.Admin.Controllers
@@ -21,45 +22,56 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["NameDescSortParam"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["NameAscSortParam"] = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
             ViewData["PriceDescSortParam"] = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
             ViewData["PriceAscSortParam"] = String.IsNullOrEmpty(sortOrder) ? "price_asc" : "";
-            
+
+            ViewData["CurrentSort"] = sortOrder;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             ViewData["CurrentFilter"] = searchString;
 
-            List<Product> objProductList = _productRepo.GetAll(includeProperties: "Category").ToList();
+            IQueryable<Product> objProductList = _productRepo.GetAll(includeProperties: "Category");
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 objProductList = objProductList
-                    .Where(s => s.Title.Contains(searchString))
-                    .ToList();
+                    .Where(s => s.Title.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    objProductList = objProductList.OrderByDescending(s => s.Title).ToList();
+                    objProductList = objProductList.OrderByDescending(s => s.Title);
                     break;
                 case "name_asc":
-                    objProductList = objProductList.OrderBy(s => s.Title).ToList();
+                    objProductList = objProductList.OrderBy(s => s.Title);
                     break;
                 case "price_desc":
-                    objProductList = objProductList.OrderByDescending(s => s.Price).ToList();
+                    objProductList = objProductList.OrderByDescending(s => s.Price);
                     break;
                 case "price_asc":
-                    objProductList = objProductList.OrderBy(s => s.Price).ToList();
+                    objProductList = objProductList.OrderBy(s => s.Price);
                     break;
                 default:
-                    objProductList = objProductList.OrderBy(s => s.Title).ToList();
+                    objProductList = objProductList.OrderBy(s => s.Title);
                     break;
             }
 
-            return View(objProductList);
+            int pageSize = 6;
+
+            return View(await PaginatedList<Product>.CreateAsync(objProductList.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Upsert(int? id)

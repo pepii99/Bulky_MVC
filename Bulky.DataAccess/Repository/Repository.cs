@@ -36,7 +36,7 @@ namespace Bulky.DataAccess.Repository
             return query.Where(filter).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IQueryable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
 
@@ -48,7 +48,7 @@ namespace Bulky.DataAccess.Repository
                 }
             }
 
-            return query.ToList();
+            return query;
         }
 
         public void Remove(T entity)
