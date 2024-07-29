@@ -1,7 +1,6 @@
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 
 namespace BulkyWeb.Areas.Customer.Controllers
