@@ -64,8 +64,16 @@
             {
                 <tr>
                     <td>@obj.Title</td>
-                    <td>@obj.Description</td>
-                    <td>@obj.ISBN</td>
+                    <td>
+                        <div class="overflow-auto" style="max-height: 200px; max-width: 500px; overflow-y: auto;">
+                            @obj.Description
+                        </div>
+                    </td>
+                    <td>
+                        <div class="overflow-auto" style="max-height: 100px; max-width: 80px;">
+                            @obj.ISBN
+                        </div>
+                    </td>
                     <td>@obj.Author</td>
                     <td>@obj.Price</td>
                     <td>@obj.Category.Name</td>
