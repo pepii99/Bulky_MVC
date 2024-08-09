@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bulky.Models
 {
-    public class Applicationuser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         public string? Name { get; set; }
