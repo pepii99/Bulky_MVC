@@ -207,11 +207,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private Applicationuser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<Applicationuser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
