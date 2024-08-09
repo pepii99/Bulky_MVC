@@ -136,7 +136,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 {
                     if (string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
-                        productVM.Product.ImageUrl = @"\images\product\raf,360x360,075,t,fafafa_ca443f4786.u1.jpg";
+                        productVM.Product.ImageUrl = @"\images\product\book.png";
                     }
 
                     _productRepo.Add(productVM.Product);

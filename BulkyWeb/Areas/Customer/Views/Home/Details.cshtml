@@ -24,28 +24,13 @@
                         <img src="@Model.ImageUrl" width="100%" class="rounded" />
                     </div>
                     <div class="col-12 col-lg-6 offset-lg-1">
-                        <div class="col-12 col-md-6 pb-4">
-                            <h3 class="badge">@Model.Category.Name</h3>
-                        </div>
-                        <div class="row ps-2">
-                            <h5 class="text-dark text-opacity-75">ISBN:@Model.ISBN</h5>
-                            <h5 class="text-dark text-opacity-75">Price:@Model.Price.ToString("c")</h5>
+                        <div class="row">
+                            <p class="text-dark fw-bold">Category: @Model.Category.Name</p>
+                            <p class="text-dark fw-bold">ISBN: @Model.ISBN</p>
+                            <p class="text-dark fw-bold">Price: @Model.Price.ToString("c")</p>
                         </div>
                         <div class="row pl-2 my-3">
-                            <p class="text-secondary lh-sm">Description: @Model.Description</p>
-                        </div>
-                        <div class="row pl-2 mb-3">
-                            <div class="col-md-4">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-primary text-white border-0 fw-semibold"
-                                          id="inputGroup-sizing-default">
-                                        Count
-                                    </span>
-                                    <input type="number" value="1" class="form-control text-end"
-                                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-
-                                </div>
-                            </div>
+                            <p class="text-primary lh-sm">Description: @Model.Description</p>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 pb-1">
